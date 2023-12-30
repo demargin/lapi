@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory;
+use App\Models\Student_Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +13,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Elimina el código para crear usuarios
+        \DB::table('users')->truncate();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory(10)->create();
+
+        \App\Models\User::factory()->create([
+             'name' => 'admin',
+             'email' => 'admin@admin.com',
+             'password' => 'password',
+         ]);
+
+
+         // Vacía la tabla students antes de ejecutar el seeder
+         \DB::table('students')->truncate();
+
+         // Código para generar los estudiantes
+         $faker = Factory::create();
+
+         for ($i = 0; $i < 100; $i++) {
+             $student = new Student_Model();
+             $student->name = $faker->name();
+             $student->course = $faker->name();
+             $student->email = $faker->safeEmail();
+             $student->phone = $faker->phoneNumber();
+             $student->save();
+        }
     }
 }
