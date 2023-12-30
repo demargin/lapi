@@ -1,0 +1,9 @@
+1- to install the vendor directory please execute :
+
+   composer install
+   
+2- To create the .env file, please execute:
+	php artisan key:generate
+	
+then you have to modify the .env file with your local variables configurations for database, after that migrate the tables with:
+	php artisan migrate.
