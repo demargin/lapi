@@ -18,9 +18,13 @@ Proporciona una API RESTful para gestionar los datos de estudiantes. Permite cre
 ## Características
 
     API RESTful: Proporciona una interfaz RESTful para interactuar con los datos de estudiantes.
+    
     CRUD completo: Permite crear, leer, actualizar y eliminar estudiantes.
+    
     Validación de datos: Valida los datos de entrada para asegurar la integridad de la información.
+    
     Respuestas JSON: Devuelve respuestas en formato JSON para facilitar la integración con otras aplicaciones.
+    
     Modelos Eloquent: Utiliza modelos Eloquent para interactuar con la base de datos de forma fluida.
 
 ## Pre-requisitos
