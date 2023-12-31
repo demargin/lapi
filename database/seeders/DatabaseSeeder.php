@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Elimina el código para crear usuarios
         \DB::table('users')->truncate();
 
         \App\Models\User::factory(10)->create();
@@ -24,11 +23,8 @@ class DatabaseSeeder extends Seeder
              'password' => 'password',
          ]);
 
-
-         // Vacía la tabla students antes de ejecutar el seeder
          \DB::table('students')->truncate();
 
-         // Código para generar los estudiantes
          $faker = Factory::create();
 
          for ($i = 0; $i < 100; $i++) {

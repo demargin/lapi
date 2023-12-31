@@ -4,39 +4,28 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Support\Facades\Validator;
 
-// Importa la clase 'Student_Model' desde el namespace 'App/Models'
-// Esta clase representa el modelo Eloquent asociada a la tabla de de 'students' de la DB
 use App\Models\Student_Model;
 
-// Clase base para controladores en Laravel
 use App\Http\Controllers\Controller;
 
-// Clase que proporciona metodos para interactuar con las solicitudes HTTP
 use Illuminate\Http\Request;
 
-// Se define la clase StudentController que extiende a la clase 'Controller'
 class StudentController extends Controller
 {
-    //Se define un metodo llamado 'index', este metodo se llama cuando se realiza una
-    // solicitud HTTP GET a la ruta asociada al controlador
+
     public function index()
     {
-        //Se usa el modelo 'Student_Model' para recuperar todos los registros de la tabla 'students'
-        // y los asigna a la variable $students
+
         $students = Student_Model::all();
 
-        // Verifica si hay registros en la variable $students
         if($students->count() > 0){
 
-            // Devuelve un request json con codigo de estado 200(success) y la lista de registros
-            // de la tabla 'students'
             return response()->json([
                 'status' => 200,
                 'students' => $students
             ], 200);
         }else{
-            //devuelve un request json con un codigo de estado 404(Not found)
-            // y un mensaje 'No records found'
+
             return response()->json([
                 'status' => 404,
                 'status_message' => 'No records found'
