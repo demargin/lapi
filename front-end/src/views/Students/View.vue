@@ -2,12 +2,12 @@ import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <div class="card">
             <div class="card-header">
                 <h4>
                     Students
-                    <RouterLink to="/student/create" class="btn btn-primary float-end">
+                    <RouterLink to="/students/create" class="btn btn-primary float-end">
                         Add Student
                     </RouterLink>
                 </h4>
@@ -34,8 +34,12 @@ import { RouterLink } from 'vue-router';
                             <td>{{ student.phone }}</td>
                             <td>{{ student.created_at }}</td>
                             <td>
-                                <RouterLink to="/" class="btn btn-success"> Edit </RouterLink>
-                                <button type="button" class="btn btn-danger">Delete</button>
+                                <RouterLink :to="{ path: '/students/'+student.id+'/edit'}" class="btn btn-success mx-2"> 
+                                    Edit 
+                                </RouterLink>
+                                <button type="button" @click="deleteStudent(student.id)" class="btn btn-danger mx-2"> 
+                                    Delete 
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -69,6 +73,23 @@ export default {
                 this.students = res.data.students;
                 //console.log(this.students)
             });
+        },
+        deleteStudent(studentId){
+            if (confirm('Are you sure, you want to delete this data?')) {
+                //console.log(studentId);
+                axios.delete(`http://localhost:8000/api/students/${studentId}/delete`)
+                    .then(res => {
+                        alert(res.data.message);
+                        this.getStudents();
+                })
+                .catch(function (error)  {
+                    if(error.response){
+                        if(error.response.status == 404){
+                            alert(error.response.data.message);
+                        }
+                    } 
+                });
+            }
         },
     },
 };
